@@ -13,7 +13,7 @@ public class Driver {
 		SpringApplication.run(Driver.class, args);
 	}
 	@GetMapping("/hello")
-	public String hello(@RequestParam(value = "name", defaultValue = "123") String name) {
+	public String hello(@RequestParam(value = "name", defaultValue = "world") String name) {
 		return String.format("Hello %s!", name);
 	}
 }
