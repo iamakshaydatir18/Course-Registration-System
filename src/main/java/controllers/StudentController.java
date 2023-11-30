@@ -6,13 +6,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class StudentController {
-    @GetMapping("/home")
-    public void getStudentHome() {
+    @GetMapping("/student")
+    public void getStudentCourses() {
 
     }
 
-    @PostMapping("/home")
+    @PostMapping("/student/register")
     public void registerForCourse() {
+
+    }
+
+    @PostMapping("/student/drop")
+    public void dropCourse() {
 
     }
 }
