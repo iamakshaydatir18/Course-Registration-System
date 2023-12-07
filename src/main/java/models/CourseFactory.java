@@ -8,4 +8,8 @@ public class CourseFactory {
     public static synchronized CourseFactory getInstance() {
         return instance;
     }
+
+    public Course createCourse(){
+        return new Course();
+    }
 }
