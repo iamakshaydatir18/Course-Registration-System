@@ -15,7 +15,7 @@ const Login = () => {
         <h1>Student Login</h1>
         <input type="text" placeholder='ID' onChange={handleChange}/>
         <input type="password" placeholder='Password' />
-        <button><Link to={"/courses/"+id}>Login</Link></button>
+        <button><Link to={"/coursespage/"+id}>Login</Link></button>
         <p><Link to="/adminlogin">Are you an admin?</Link></p>
     </div>
   )
