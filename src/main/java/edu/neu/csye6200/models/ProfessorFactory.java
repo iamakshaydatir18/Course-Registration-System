@@ -1,4 +1,4 @@
-package models;
+package edu.neu.csye6200.models;
 
 public class ProfessorFactory extends AbstractUserFactory{//eager singleton implementation
     private static ProfessorFactory instance = new ProfessorFactory();

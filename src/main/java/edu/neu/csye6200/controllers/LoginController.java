@@ -1,6 +1,6 @@
-package controllers;
+package edu.neu.csye6200.controllers;
 
-import models.LoginCredentials;
+import edu.neu.csye6200.models.LoginCredentials;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

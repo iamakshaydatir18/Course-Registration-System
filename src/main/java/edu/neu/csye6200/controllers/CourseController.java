@@ -1,4 +1,4 @@
-package controllers;
+package edu.neu.csye6200.controllers;
 
 import java.util.ArrayList;
 
@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
+import com.google.gson.Gson;
 
-import models.Course;
-import models.CourseFactory;
+import edu.neu.csye6200.models.Course;
+import edu.neu.csye6200.models.CourseFactory;
 
 @RestController
 public class CourseController {
@@ -47,7 +48,9 @@ public class CourseController {
         demoCourses.add(course3);
         demoCourses.add(course4);
 
-        return("Hail Hitler");
+        Gson gson = new Gson();
+        String json = gson.toJson(demoCourses);
+        return(json);
 
     }
 

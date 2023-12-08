@@ -1,4 +1,4 @@
-package models;
+package edu.neu.csye6200.models;
 
 public class CourseFactory {
     private static final CourseFactory instance = new CourseFactory();
