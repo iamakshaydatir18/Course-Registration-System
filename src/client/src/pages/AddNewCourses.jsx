@@ -2,6 +2,8 @@ import React from 'react'
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const AddNewCourses = () => {
     const loction = useLocation()
@@ -9,12 +11,37 @@ const AddNewCourses = () => {
     const studId = loction.pathname.split("/")[2]
 
     const [courses, setCourses] = useState([
-        { id: 1, name: 'Introduction to React', credits: 3 },
-        { id: 2, name: 'JavaScript Fundamentals', credits: 4 },
-        { id: 3, name: 'Java for Beginners', credits: 4 },
-        { id: 4, name: 'Intro to DSA', credits: 3 },
-        { id: 5, name: 'Object Oriented Design', credits: 5 },
-      ]);
+      // { id: 1, name: 'Introduction to React', credits: 3 },
+      // { id: 2, name: 'JavaScript Fundamentals', credits: 4 },
+      // { id: 3, name: 'Java for Beginners', credits: 4 },
+      // { id: 4, name: 'Intro to DSA', credits: 3 },
+      // { id: 5, name: 'Object Oriented Design', credits: 5 },
+    ]);
+
+    // const coursesFromServer = async() =>{
+    //   try{
+    //     const res = await axios.get("http://localhost:8080/courses")
+    //     console.log(res.data);
+    //     return res.data;
+    //   }catch(err){
+    //     console.log(err)
+    //   }
+    // }
+
+    // setCourses(coursesFromServer);
+    
+      useEffect(() => {
+        const getCousres = async() =>{
+          try{
+            const res = await axios.get("http://localhost:8080/courses")
+            setCourses(res.data);
+            console.log(res.data);
+          }catch(err){
+            console.log(err)
+          }
+        }
+        getCousres();
+      },[]);
 
   return (
     <div>
@@ -36,7 +63,7 @@ const AddNewCourses = () => {
         <br />
         <br />
       </div>
-      <div><button><Link to={`/coursespage/${studId}`}>Go back to regestered courses</Link></button></div>
+      <div><button><Link to={`/coursespage/${studId}`}>Go back to registered courses</Link></button></div>
       <br />
       <br />
       <div><button>Confirm Changes</button></div>
