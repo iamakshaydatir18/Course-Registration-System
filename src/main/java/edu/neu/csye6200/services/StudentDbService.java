@@ -48,8 +48,7 @@ public class StudentDbService {
         }
         
         private static String studentToCsvString(Student student) {
-			return String.format("%d,%s,%s,%s", student.getId(), student.getName(), student.getPassword(), student.getRegisteredCourses() );
+			return String.format("%d,%s,%s,%s", student.getId(), student.getName(), student.getPassword(), student.getCourses());
 		}
-
-
+    }
 }

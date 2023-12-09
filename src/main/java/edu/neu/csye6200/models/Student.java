@@ -33,11 +33,15 @@ public class Student extends User {
         this.id = id;
     }
     
-    void addCourse(int x){
+    public void addCourse(int x){
         courseList.add(x);
     }
 
-    void removeCourse(int x){
+    public ArrayList<Integer> getCourses(){
+        return courseList;
+    }
+
+    public void removeCourse(int x){
         courseList.remove(Integer.valueOf(x));
     }
 }
