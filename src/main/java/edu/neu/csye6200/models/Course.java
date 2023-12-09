@@ -5,6 +5,7 @@ public class Course {
     String courseName;
     String courseDescription;
     int courseCredit;
+    Professor instructor;
 
     Course(){}
 
@@ -38,5 +39,17 @@ public class Course {
 
     public void setCourseCredit(int courseCredit) {
         this.courseCredit = courseCredit;
+    }
+
+    public Professor getProfessor(){
+        return instructor;
+    }
+
+    public void setProfessor(int profId, String name,int courseId){
+        ProfessorFactory instance = ProfessorFactory.getInstance();
+        instructor = (Professor)(instance.createUser());
+        instructor.setCourseId(courseId);
+        instructor.setId(profId);
+        instructor.setName(name);
     }
 }
