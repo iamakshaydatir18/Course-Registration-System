@@ -14,7 +14,7 @@ const Courses = () => {
     const [student,setStudent] = useState()
 
     useEffect(() => {
-      const getCousres = async() =>{
+      const getStudent = async() =>{
         try{
           const res = await axios.get("http://localhost:8080/courses")
           setStudent(res.data);
@@ -23,23 +23,17 @@ const Courses = () => {
           console.log(err)
         }
       }
-      getCousres();
+      getStudent();
     },[]);
 
-    const [courses, setCourses] = useState([
-      { id: 1, name: 'Introduction to React', credits: 3 },
-      { id: 2, name: 'JavaScript Fundamentals', credits: 4 },
-      { id: 3, name: 'Java for Beginners', credits: 4 },
-      { id: 4, name: 'Intro to DSA', credits: 3 },
-      { id: 5, name: 'Object Oriented Design', credits: 5 },
-      ]);
+    const [courses, setCourses] = useState(student.Courses);
     
     
   return (
     <div>
         <h1>Courses</h1>
         <h3>Student id:{studId}</h3>
-        <h3>Student id:{studId}</h3>
+        <h3>Student id:{student.name}</h3>
         <h3>Credits taken:{0}</h3>
         <h3>Credits remaining:{24}</h3>
         <div>
