@@ -61,6 +61,7 @@ public class CourseController {
         String json = gson.toJson(obj.readFromFile());
         return(json);
     }
+    
 
     @PostMapping("/courses/add")
     public void addCourse() {

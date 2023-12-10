@@ -33,7 +33,7 @@ const AddNewCourses = () => {
       useEffect(() => {
         const getCousres = async() =>{
           try{
-            const res = await axios.get("http://localhost:8080/courses")
+            const res = await axios.get("/courses")
             setCourses(res.data);
             console.log(res.data);
           }catch(err){
