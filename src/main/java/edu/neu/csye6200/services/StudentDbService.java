@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.neu.csye6200.models.Student;
+import edu.neu.csye6200.models.StudentFactory;
 
 
 public class StudentDbService {
@@ -23,13 +24,24 @@ public class StudentDbService {
                     int ID = Integer.parseInt(fields[0]);
                     String name = fields[1];
                     String password = fields[2];
-                    List<String> registedcourse = new ArrayList<>();
+                    List<Integer> registedcourse = new ArrayList<>();
                     for (int i = 3; i < fields.length; i++) {
                     	registedcourse.add(fields[i]);
                     }
 //                    Create Student 
-//                    studentRoasterList.add(new Student(ID, age, fname, lname, pfname, plname, studentid, gpa,
-//                            teacher.getName(), teacher.getHourlyWage(), teacher.getAge()));
+                    StudentFactory instance = StudentFactory.getInstance();
+                    student = (Student)(instance.createUser()); 
+                    student.setId(ID);
+                    student.setName(name);
+                    student.setPassword(password);
+                    
+                    for (int course: registedcourse) {
+                    
+                    	studentRoasterList.addCourse(course);
+                    }
+                    
+                    
+                    studentRoasterList.add();
                 }
             } catch (IOException e) {
                 System.err.println("Error reading from file: " + e.getMessage());
@@ -48,7 +60,15 @@ public class StudentDbService {
         }
         
         private static String studentToCsvString(Student student) {
-			return String.format("%d,%s,%s,%s", student.getId(), student.getName(), student.getPassword(), student.getCourses());
-		}
+            List<Integer> courses = student.getCourses();
+            StringBuilder coursesString = new StringBuilder();
+            for (int i = 0; i < courses.size(); i++) {
+                coursesString.append(courses.get(i));
+                if (i < courses.size() - 1) {
+                    coursesString.append(",");
+                }
+            }
+            return String.format("%d,%s,%s,%s", student.getId(), student.getName(), student.getPassword(), coursesString.toString());
+        }
     }
 }
