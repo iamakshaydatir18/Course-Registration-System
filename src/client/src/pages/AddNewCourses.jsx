@@ -54,7 +54,10 @@ const AddNewCourses = () => {
             <div key={index}>
                 <span>{course.id}</span>
                 <span>{course.name}</span>
-                <span>Credits:{course.credits}</span>
+                <span>{course.desc}</span>
+                <span>{course.credit}</span>
+                <span>{course.desc}</span>
+                <span>{course.profId}</span>
                 <span>
                     <button>Add Course</button>
                 </span>
