@@ -2,12 +2,29 @@ import React from 'react'
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 const Courses = () => {
 
     const loction = useLocation()
 
     const studId = loction.pathname.split("/")[2]
+
+    const [student,setStudent] = useState()
+
+    useEffect(() => {
+      const getCousres = async() =>{
+        try{
+          const res = await axios.get("http://localhost:8080/courses")
+          setStudent(res.data);
+          console.log(res.data);
+        }catch(err){
+          console.log(err)
+        }
+      }
+      getCousres();
+    },[]);
 
     const [courses, setCourses] = useState([
       { id: 1, name: 'Introduction to React', credits: 3 },
@@ -16,10 +33,12 @@ const Courses = () => {
       { id: 4, name: 'Intro to DSA', credits: 3 },
       { id: 5, name: 'Object Oriented Design', credits: 5 },
       ]);
-
+    
+    
   return (
     <div>
         <h1>Courses</h1>
+        <h3>Student id:{studId}</h3>
         <h3>Student id:{studId}</h3>
         <h3>Credits taken:{0}</h3>
         <h3>Credits remaining:{24}</h3>

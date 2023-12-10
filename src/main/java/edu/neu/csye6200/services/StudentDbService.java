@@ -26,22 +26,22 @@ public class StudentDbService {
                     String password = fields[2];
                     List<Integer> registedcourse = new ArrayList<>();
                     for (int i = 3; i < fields.length; i++) {
-                    	registedcourse.add(fields[i]);
+                    	registedcourse.add(Integer.parseInt(fields[i]));
                     }
 //                    Create Student 
                     StudentFactory instance = StudentFactory.getInstance();
-                    student = (Student)(instance.createUser()); 
+                    Student student = (Student)(instance.createUser()); 
                     student.setId(ID);
                     student.setName(name);
                     student.setPassword(password);
                     
                     for (int course: registedcourse) {
                     
-                    	studentRoasterList.addCourse(course);
+                    	student.addCourse(course);
                     }
                     
                     
-                    studentRoasterList.add();
+                    studentRoasterList.add(student);
                 }
             } catch (IOException e) {
                 System.err.println("Error reading from file: " + e.getMessage());

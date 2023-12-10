@@ -57,7 +57,10 @@ public class CourseController {
         // return(json);
 
         CourseDbService obj = new CourseDbService();
-        obj.read();
+        ArrayList<Course> courseList = obj.read();
+        Gson gson = new Gson();
+        String json = gson.toJson(courseList);
+        return(json);
     }
 
     @PostMapping("/courses/add")
