@@ -57,9 +57,8 @@ public class CourseController {
         // return(json);
 
         CourseDbService obj = new CourseDbService();
-        ArrayList<Course> courseList = obj.read();
         Gson gson = new Gson();
-        String json = gson.toJson(courseList);
+        String json = gson.toJson(obj.readFromFile());
         return(json);
     }
 

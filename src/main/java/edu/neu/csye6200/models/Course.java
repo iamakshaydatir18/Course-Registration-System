@@ -45,10 +45,9 @@ public class Course {
         return instructor;
     }
 
-    public void setProfessor(int profId, String name,int courseId){
+    public void setProfessor(int profId, String name){
         ProfessorFactory instance = ProfessorFactory.getInstance();
         instructor = (Professor)(instance.createUser());
-        instructor.setCourseId(courseId);
         instructor.setId(profId);
         instructor.setName(name);
     }

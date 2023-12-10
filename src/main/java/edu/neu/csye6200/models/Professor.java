@@ -1,7 +1,6 @@
 package edu.neu.csye6200.models;
 
 public class Professor extends User {
-    int courseId;
     public Professor() {}
     
     public int getId() {
@@ -20,11 +19,4 @@ public class Professor extends User {
         this.name = name;
     }
 
-    public int getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
-    }
 }

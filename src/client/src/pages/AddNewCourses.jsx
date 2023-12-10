@@ -52,12 +52,12 @@ const AddNewCourses = () => {
         <div>
         {courses.map((course,index) => (
             <div key={index}>
-                <span>{course.id}</span>
-                <span>{course.name}</span>
-                <span>{course.desc}</span>
-                <span>{course.credit}</span>
-                <span>{course.desc}</span>
-                <span>{course.profId}</span>
+                <span>{course.courseId}</span>
+                <span>{course.courseName}</span>
+                <span>{course.courseDescription}</span>
+                <span>{course.courseCredit}</span>
+                <span>{course.instructor.name}</span>
+                <span>{course.instructor.id}</span>
                 <span>
                     <button>Add Course</button>
                 </span>
