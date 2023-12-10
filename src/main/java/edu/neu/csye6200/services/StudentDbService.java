@@ -14,8 +14,9 @@ import edu.neu.csye6200.models.StudentFactory;
 public class StudentDbService {
     public static class FileUtility {
 
-        public static List<Student> readFromFile(String filename) {
+        public static List<Student> readFromFile() {
             List<Student> studentRoasterList = new ArrayList<Student>();
+            String filename = "src/main/java/edu/neu/csye6200/Data/StudentsList.csv";
             try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
                 String line;
                 String inputLine = null;
@@ -49,8 +50,9 @@ public class StudentDbService {
             return studentRoasterList;
         }
 
-        public static void writeToFile(List<Student> studentRosterList, String filename) {
-            try (FileWriter writer = new FileWriter(filename, true)) {
+        public static void writeToFile(List<Student> studentRosterList) {
+            String filename = "src/main/java/edu/neu/csye6200/Data/StudentsList.csv";
+            try (FileWriter writer = new FileWriter(filename, false)) {
                 for (Student student : studentRosterList) {
                     writer.write(studentToCsvString(student));
                 }
