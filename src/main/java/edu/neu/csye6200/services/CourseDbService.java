@@ -40,7 +40,7 @@ public class CourseDbService implements DbService {
         return coursesRoasterList;
     }
 
-    public static void writeToFile(List<Course> coursesRoasterList) {
+    public void writeToFile(List<Course> coursesRoasterList) {
         String filename = "src/main/java/edu/neu/csye6200/Data/CoursesList.csv";
         try (FileWriter writer = new FileWriter(filename)) {
             for (Course course : coursesRoasterList) {
