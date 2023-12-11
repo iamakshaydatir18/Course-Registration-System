@@ -1,18 +1,11 @@
 package edu.neu.csye6200.controllers;
 
-import java.util.ArrayList;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
+import edu.neu.csye6200.models.Course;
+import edu.neu.csye6200.models.CourseServiceFactory;
+import edu.neu.csye6200.models.Professor;
+import org.springframework.web.bind.annotation.*;
 import com.google.gson.Gson;
 
-import edu.neu.csye6200.models.Course;
-import edu.neu.csye6200.models.CourseFactory;
 import edu.neu.csye6200.services.CourseDbService;
 
 @RestController
@@ -23,14 +16,14 @@ public class CourseController {
 
         CourseDbService obj = new CourseDbService();
         Gson gson = new Gson();
-        String json = gson.toJson(obj.readFromFile());
-        return(json);
+        return(gson.toJson(obj.readFromFile()));
     }
     
 
     @PostMapping("/courses/add")
-    public void addCourse() {
-
+    public void addCourse(@RequestBody Course newCourse, @RequestBody Professor professor) {
+        System.out.println(professor.getName());
+        CourseServiceFactory.COURSE_SERVICE.getObject().addCourse(newCourse);
     }
 
     @DeleteMapping("/courses/remove")

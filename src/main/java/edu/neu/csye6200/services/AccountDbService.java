@@ -1,11 +1,11 @@
-package edu.neu.csye6200.services;
+/*package edu.neu.csye6200.services;
 
 import edu.neu.csye6200.models.Student;
 
 import java.util.List;
 
-public class AccountDbService implements DbService {
-    
+public class AccountDbService implements DbService<Student> {
+
     public boolean authenticate(int studentId, String password) {
         List<Student> studentRoasterList = StudentDbService.readFromFile();
         for (Student student : studentRoasterList) {
@@ -15,4 +15,4 @@ public class AccountDbService implements DbService {
         }
         return false;
     }
-}
+}*/

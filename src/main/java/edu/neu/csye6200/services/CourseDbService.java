@@ -9,7 +9,9 @@ import java.util.List;
 import edu.neu.csye6200.models.Course;
 import edu.neu.csye6200.models.CourseFactory;
 
-public class CourseDbService implements DbService {
+public class CourseDbService implements DbService<Course> {
+
+    public static final DbService<Course> Instance = new CourseDbService();
 
     public List<Course> readFromFile() {
         String filename = "src/main/java/edu/neu/csye6200/Data/CoursesList.csv";
@@ -52,9 +54,7 @@ public class CourseDbService implements DbService {
     }
 
     private static String courseToCsvString(Course course) {
-        return String.format("%s,%s,%d,%s,%d\n", course.getCourseName(),
-                course.getCourseDescription(), course.getCourseCredit(), course.getProfessor(),
-                course.getCourseId());
+        return String.format("%d,%s,%s,%d,%s\n", course.getCourseId(), course.getCourseName(),
+                course.getCourseDescription(), course.getCourseCredit(), course.getProfessor());
     }
-
 }

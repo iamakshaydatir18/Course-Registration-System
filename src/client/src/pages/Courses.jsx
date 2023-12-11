@@ -1,79 +1,80 @@
 import React from 'react'
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import {useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect } from 'react';
 
 const Courses = () => {
-
-    const loction = useLocation()
-
-    const studId = loction.pathname.split("/")[2]
-
+    const location = useLocation()
+    const studentId = location.pathname.split("/")[2]
     const [student,setStudent] = useState({
       name:"",
       courseList:[],
     })
+    const [courses, setCourses] = useState([]);
+    const totalCreditsTaken = courses.reduce((total, course) => total + course.courseCredit, 0);
 
     useEffect(() => {
-      const getStudent = async() =>{
-        try{
-          const res = await axios.get(`/student/${studId}`)
-          setStudent(res.data);
-          console.log(res.data);
-        }catch(err){
-          console.log(err)
-        }
-      }
-      getStudent();
+        getStudent();
     },[]);
 
-    const [courses, setCourses] = useState([]);
-
-
     useEffect(() => {
-      const getCourses = async() =>{
-        try{
-          const res = await axios.get(`/courses`)
-          const filteredCourses = res.data.filter(course => student.courseList.includes(course.courseId));
-          setCourses(filteredCourses);
-          console.log(filteredCourses);
-        }catch(err){
-          console.log(err)
-        }
-      }
-      getCourses();
+        getStudentCourses();
     },[student]);
-    
-    const totalCreditsTaken = courses.reduce((total, course) => total + course.courseCredit, 0);
-    
+
+    const getStudent = async() =>{
+        try{
+            const res = await axios.get(`/student/${studentId}`)
+            setStudent(res.data);
+            console.log(res.data);
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    const getStudentCourses = async() =>{
+        try{
+            const res = await axios.get(`/student/${studentId}/courses`)
+            setCourses(res.data);
+            console.log(res.data);
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    const dropStudentFromCourse = async (courseId) =>{
+        try {
+            const res = await axios.post(`/student/${studentId}/drop/${courseId}`);
+            setCourses(res.data);
+        } catch(err){
+            //setError("Unable to drop course")
+        }
+    }
+
   return (
     <div>
         <h1>Courses</h1>
-        <h3>Student id:{studId}</h3>
+        <h3>Student id:{studentId}</h3>
         <h3>Student name:{student.name}</h3>
         <h3>Credits taken:{totalCreditsTaken}</h3>
-        <h3>Credits remaining:{24}</h3>
+        <h3>Credits remaining:{24-totalCreditsTaken}</h3>
         <div>
           
         {courses.map((course,index) => (
             <div key={index}>
-                <span>{course.courseId}</span>
-                <span>{course.courseName}</span>
-                <span>Credits:{course.courseCredit}</span>
+                <span>{course.courseId}  </span>
+                <span>{course.courseName}  </span>
+                <span>Credits:{course.courseCredit}  </span>
                 <span>
-                    <button>Delete</button>
+                    <button onClick={() => dropStudentFromCourse(course.courseId)}>Drop Course</button>
                 </span>
             </div>
         ))}
         <br />
         <br />
       </div>
-      <div><button><Link to={`/addnewcourses/${studId}`}>Add New Course</Link></button></div>
-      <br />
-      <br />
-      <div><button>Confirm Changes</button></div>
+      <div><button><Link to={`/addnewcourses/${studentId}`}>Add New Course</Link></button></div>
     </div>
   )
 }

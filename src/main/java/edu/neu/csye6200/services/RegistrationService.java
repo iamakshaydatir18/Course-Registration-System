@@ -2,18 +2,33 @@ package edu.neu.csye6200.services;
 
 import edu.neu.csye6200.models.Student;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RegistrationService {
-    public void registerNewStudent(int studentId, String studentName, String password) {
-        List<Student> studentRoasterList = StudentDbService.readFromFile();
-        Student newStudent = new Student();
-        newStudent.setId(studentId);
-        newStudent.setName(studentName);
-        newStudent.setPassword(password);
+    public void registerStudentForCourse(int studentId, ArrayList<Integer> courseIds) {
+        List<Student> studentRoasterList = StudentDbService.Instance.readFromFile();
+        for (Student student : studentRoasterList) {
+            if (student.getId() == studentId) {
+                for (int c : courseIds) {
+                    student.addCourse(c);
+                }
+            } else {
+                System.out.println("Student not Found!");
+            }
+        }
+        StudentDbService.Instance.writeToFile(studentRoasterList);
+    }
 
-        studentRoasterList.add(newStudent);
-
-        StudentDbService.writeToFile(studentRoasterList);
+    public void dropCourse(int studentId, int courseId) {
+        List<Student> studentRoasterList = StudentDbService.Instance.readFromFile();
+        for (Student student : studentRoasterList) {
+            if (student.getId() == studentId) {
+                student.removeCourse(courseId);
+            } else {
+                System.out.println("Student not Found!");
+            }
+        }
+        StudentDbService.Instance.writeToFile(studentRoasterList);
     }
 }

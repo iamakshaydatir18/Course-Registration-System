@@ -1,6 +1,6 @@
 package edu.neu.csye6200.models;
 
-public class StudentFactory extends AbstractUserFactory {//lazy singleton implementation
+public class StudentFactory extends AbstractUserFactory {
     private static StudentFactory instance;
 
     private StudentFactory() {}

@@ -10,9 +10,11 @@ import java.util.List;
 import edu.neu.csye6200.models.Student;
 import edu.neu.csye6200.models.StudentFactory;
 
-public class StudentDbService {
+public class StudentDbService implements DbService<Student> {
 
-    public static List<Student> readFromFile() {
+    public static final DbService<Student> Instance = new StudentDbService();
+
+    public synchronized List<Student> readFromFile() {
         String filename = "src/main/java/edu/neu/csye6200/Data/StudentsList.csv";
         List<Student> studentRoasterList = new ArrayList<Student>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
@@ -26,7 +28,7 @@ public class StudentDbService {
                 for (int i = 3; i < fields.length; i++) {
                     registedcourse.add(Integer.parseInt(fields[i]));
                 }
-                // Create Student
+
                 StudentFactory instance = StudentFactory.getInstance();
                 Student student = (Student) (instance.createUser());
                 student.setId(ID);
@@ -46,7 +48,7 @@ public class StudentDbService {
         return studentRoasterList;
     }
 
-    public static void writeToFile(List<Student> studentRosterList) {
+    public synchronized void writeToFile(List<Student> studentRosterList) {
         String filename = "src/main/java/edu/neu/csye6200/Data/StudentsList.csv";
         try (FileWriter writer = new FileWriter(filename)) {
             for (Student student : studentRosterList) {
@@ -66,7 +68,7 @@ public class StudentDbService {
                 coursesString.append(",");
             }
         }
-        return String.format("%d,%s,%s,%s", student.getId(), student.getName(), student.getPassword(),
+        return String.format("%d,%s,%s,%s\n", student.getId(), student.getName(), student.getPassword(),
                 coursesString.toString());
     }
 }

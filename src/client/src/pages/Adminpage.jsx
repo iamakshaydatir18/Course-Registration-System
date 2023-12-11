@@ -1,53 +1,38 @@
-import React from 'react'
-import { useState } from 'react';
+import React, {useEffect, useState} from 'react'
 import Modal from 'react-modal';
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 Modal.setAppElement('#root');
 
-
 const Adminpage = () => {
-
-    const [courses, setCourses] = useState([
-        {
-            id: 1,
-            name: 'Introduction to React',
-            desc: 'Learn the basics of React framework',
-            professor: 'John Doe'
-        },
-        {
-            id: 2,
-            name: 'JavaScript Fundamentals',
-            desc: 'Foundational concepts of JavaScript programming',
-            professor: 'Jane Smith'
-        },
-        {
-            id: 3,
-            name: 'Java for Beginners',
-            desc: 'Introduction to Java programming language',
-            professor: 'Alex Johnson'
-        },
-        {
-            id: 4,
-            name: 'Intro to DSA',
-            desc: 'Fundamentals of Data Structures and Algorithms',
-            professor: 'Emily Brown'
-        },
-        {
-            id: 5,
-            name: 'Object Oriented Design',
-            desc: 'Principles of Object Oriented Design',
-            professor: 'Michael Wilson'
-        },
-      ]);
-
-    const [newCourse, setNewCourse] = useState({
-        id:0,
-        name:"",
-        desc:"",
-        professor:"",
-    });
     
     const [modalIsOpen, setIsOpen] = React.useState(false);
+    const [courses, setCourses] = useState([]);
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const getCourses = async () => {
+            try {
+                const res = await axios.get("/courses")
+                setCourses(res.data);
+            } catch (err) {
+
+            }
+        }
+        getCourses();
+    },[]);
+
+    const [newCourse, setNewCourse] = useState({
+        courseId:0,
+        courseName:"",
+        courseDescription:"",
+        courseCredit:0,
+        instructor: {
+            name:"",
+            id: 0,
+        },
+    });
 
     const openModal = () => {
         setIsOpen(true);
@@ -72,14 +57,49 @@ const Adminpage = () => {
         subtitle.style.color = '#f00';
     }
 
-    const handleChange = (e) =>{
-        setNewCourse((prev)=>({...prev,[e.target.name]: (e.target.name !== 'id') ? e.target.value : Number(e.target.value)}))
-        console.log(newCourse)
-    }
+    // const handleChange = (e) =>{
+    //     setNewCourse((prev)=>({...prev,[e.target.courseName]: (e.target.courseName !== 'id') ? e.target.value : Number(e.target.value)}))
+    //     console.log(newCourse)
+    // }
 
-    const addCourse = () =>{
-        setCourses(prev => [...prev, newCourse])
-        console.log(courses)
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        if (name === 'professorName' || name === 'professorId') {
+            // Determine the instructor property to update
+            const instructorProperty = name === 'professorName' ? 'name' : 'id';
+
+            // Update the nested instructor object
+            setNewCourse(prev => ({
+                ...prev,
+                instructor: {
+                    ...prev.instructor,
+                    [instructorProperty]: (instructorProperty === 'id') ? Number(value) : value
+                }
+            }));
+        } else {
+            // Update other course fields
+            setNewCourse(prev => ({
+                ...prev,
+                [name]: (name === 'courseId' || name === 'courseCredit') ? Number(value) : value
+            }));
+        }
+    };
+
+    const addCourse = async () =>{
+        try {
+            const res = await axios.post(`/courses/add`, {
+                courseId:newCourse.courseId,
+                courseName:newCourse.courseName,
+                courseDescription:newCourse.courseDescription,
+                courseCredit:newCourse.courseCredit,
+                instructor:newCourse.instructor,
+            });
+
+            navigate(`/admin`);
+        } catch(err){
+            //setError("Error while adding the course")
+        }
     }
 
   return (
@@ -89,9 +109,11 @@ const Adminpage = () => {
             {courses.map((course,index)=>(
                 <div key={index}>
                     <span>{course.id}||</span>
-                    <span>{course.name}||</span>
-                    <span>{course.professor}||</span>
+                    <span>{course.courseName}||</span>
                     <span>{course.desc}||</span>
+                    <span>{course.credit}||</span>
+                    <span>{course.instructor.name}||</span>
+                    <span>{course.instructor.id}||</span>
                     <span><button>Delete Course</button></span>
                 </div>
             ))}
@@ -107,16 +129,17 @@ const Adminpage = () => {
             <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Add a new course</h2>
             <div>Add course details</div>
             <div>
-                <input type="text" placeholder='Course ID' name='id' onChange={handleChange}/>
-                <input type="text" placeholder='Course Name' name='name' onChange={handleChange}/>
-                <input type="text" placeholder='Course Instructor' name='professor' onChange={handleChange}/>
-                <input type="text" placeholder='Course Details' name='desc' onChange={handleChange}/>
+                <input type="text" placeholder='Course ID' name='courseId' onChange={handleChange}/>
+                <input type="text" placeholder='Course Name' name='courseName' onChange={handleChange}/>
+                <input type="text" placeholder='Course Description' name='courseDescription' onChange={handleChange}/>
+                <input type="text" placeholder='Course Credit' name='courseCredit' onChange={handleChange}/>
+                <input type="text" placeholder='Professor Name' name='professorName' onChange={handleChange}/>
+                <input type="text" placeholder='Professor Id' name='professorId' onChange={handleChange}/>
             </div>
             <div>
-                <button onClick={()=>addCourse()}>Confirm Entry</button>
-                <button onClick={closeModal}>close</button>
+                <button onClick={()=> addCourse()}>Confirm Entry</button>
+                <button onClick={() => closeModal()}>close</button>
             </div>
-            
       </Modal>
     </div>
   )
