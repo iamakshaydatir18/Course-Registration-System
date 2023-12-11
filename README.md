@@ -1,27 +1,50 @@
-# Welcome to the course CSYE6200 - Object Oriented Design
-> Northeastern University, College of Engineering
+# Student Course Registration Webstie - CSYE6200 Final Project
+
+Welcome to the Student Course Registration Website, a platform 
+developed to streamline the course registration process for students. 
+Leveraging  React for the frontend and Spring Boot to implement backend APIs, 
+this project provides an efficient solution for students to manage their course selections. 
+Users can log in, browse available courses, and add them to their personal bucket. 
+Meanwhile, administrative users have the privilege to log in, add and delete courses, 
+ensuring dynamic content management. All essential data, including student information and course registration 
+details, is stored in two CSV files, namely CoursesList.csv and StudentList.csv.
 
 
-## Professor: Daniel Peters
+## Implementations Used
+1. Frontend: [React] 
+2. Backend: [SpringBoot]
+3. Databse: Data stored as csv files
 
-### Requirements
-1. Eclipse or VS Code or IntelliJ.
 
-Note: If you are using Eclipse, please have git CLI installed on your system or GitHub Desktop to commit the code in this repository
+## Project Implementation Overview
+### Controllers
+CourseController: Manages course-related requests, including retrieval, addition, and deletion.
 
-### SetUp Instructions
-1. Please clone the repository on your local system
-2. For Eclipse Import the project as Existing Maven Project, For IntelliJ you can directlty open it using 'Get from VCS'.
-4. All code should be pushed to the main branch
-3. Ensure the GitHub actions are successful post push
+StudentController: Handles student-related operations, such as retrieving information and managing registrations.
 
-Submissions will have deadlines, failed GitHub Actions would result in point deductions.
+LoginController: Responsible for user authentication, verifying credentials, and granting access based on roles.
 
-### References
-1. Cloning a Repository: <https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository>
-2. Any GitHub Setup: Please refer to the Git & GitHub Fundamentals Repository shared to you by your respective TA and refer the README.md section
+### Models
+User Models (Abstract, User, Professor): Defines user entities, with abstract and role-specific attributes.
 
-Please reach out to your respective TA if you need any help in regards with submission/ GitHub
+User Factories (Abstract, User, Professor): Implements factories for flexible user instantiation.
 
-Author:
-- Ruchika Sharma (sharma.ruc@northeastern.edu)
+LoginCredentials Model: Represents user login credentials for authentication.
+
+Course Model: Defines course entity attributes like code, title, professor, and availability.
+
+### Services
+DatabaseService Interface: Ensures a consistent interface for CSV-based data interaction.
+
+Course Database Service: Manages course data with operations like reading, adding, and updating.
+
+Registration Database Service: Handles student registrations using the DatabaseService interface.
+
+Account Database Service: Manages user account information and roles via CSV interaction.
+
+### Additional Components
+AdminService: For administrative tasks, dependent on the completion of Course Database Service.
+
+
+## Individual Contributions
+
