@@ -1,6 +1,7 @@
 package edu.neu.csye6200.controllers;
 
 import edu.neu.csye6200.models.Course;
+import edu.neu.csye6200.models.CourseProfessorDto;
 import edu.neu.csye6200.models.CourseServiceFactory;
 import edu.neu.csye6200.models.Professor;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +22,20 @@ public class CourseController {
     
 
     @PostMapping("/courses/add")
-    public void addCourse(@RequestBody Course newCourse, @RequestBody Professor professor) {
-        System.out.println(professor.getName());
-        CourseServiceFactory.COURSE_SERVICE.getObject().addCourse(newCourse);
+    public String addCourse(@RequestBody CourseProfessorDto courseDto) {
+        CourseServiceFactory.COURSE_SERVICE.getObject().addCourse(courseDto);
+
+        CourseDbService obj = new CourseDbService();
+        Gson gson = new Gson();
+        return(gson.toJson(obj.readFromFile()));
     }
 
-    @DeleteMapping("/courses/remove")
-    public void removeCourse() {
+    @PostMapping("/courses/{courseId}/remove")
+    public String removeCourse(@PathVariable String courseId) {
+        CourseServiceFactory.COURSE_SERVICE.getObject().removeCourse(courseId);
 
+        CourseDbService obj = new CourseDbService();
+        Gson gson = new Gson();
+        return(gson.toJson(obj.readFromFile()));
     }
 }

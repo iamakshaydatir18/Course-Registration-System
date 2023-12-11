@@ -1,17 +1,11 @@
 package edu.neu.csye6200.controllers;
 
-import edu.neu.csye6200.models.Course;
-import edu.neu.csye6200.models.StudentServiceFactory;
+import edu.neu.csye6200.models.*;
+import edu.neu.csye6200.services.AccountService;
 import edu.neu.csye6200.services.CourseDbService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.google.gson.Gson;
 
-
-import edu.neu.csye6200.models.Student;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -62,5 +56,11 @@ public class StudentController {
 
         Gson gson = new Gson();
         return(gson.toJson(studentCourseList));
+    }
+
+    @PostMapping("/student/new")
+    public void createNewStudent(@RequestBody RegistrationCredentials credentials) {
+        AccountService accountService = AccountServiceFactory.ACCOUNT_SERVICE.getObject();
+        boolean result = accountService.registerNewStudent(credentials.getId(), credentials.getName(), credentials.getPassword());
     }
 }

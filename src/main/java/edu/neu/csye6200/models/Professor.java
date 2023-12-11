@@ -1,6 +1,8 @@
 package edu.neu.csye6200.models;
 
 public class Professor extends User {
+    private String password;
+
     public Professor() {}
     public int getId() {
         return id;
@@ -14,6 +16,9 @@ public class Professor extends User {
     public void setName(String name) {
         this.name = name;
     }
+    public String getPassword() { return this.password; }
+    public void setPassword(String password) { this.password = password; }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

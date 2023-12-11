@@ -1,64 +1,46 @@
 import React, { useState } from 'react';
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 const StudentRegistration = () => {
+  const [id, setId] = useState(0)
+  const [password, setPassword] = useState("")
+  const [name, setName] = useState("")
+  const navigate = useNavigate()
   const [studentInfo, setStudentInfo] = useState({
-    name: '',
-    id: '',
-    password: '',
+    name: "",
+    id: "",
+    password: "",
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setStudentInfo({
-      ...studentInfo,
-      [name]: value,
-    });
-  };
+    if (name === "id") setId(value);
+    if (name === "password") setPassword(value);
+    if (name === "name") setName(value); // Corrected this line
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Student Info:', studentInfo);
+  const handleSubmit = async () => {
+    try {
+      const res = await axios.post(`/student/new`, {
+        name: name,
+        id: id,
+        password: password,
+      });
+      navigate(`/`);
+    } catch(err){
+
+    }
   };
 
   return (
     <div>
       <h1>Student Registration</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input
-            type="text"
-            name="name"
-            value={studentInfo.name}
-            onChange={handleInputChange}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          ID:
-          <input
-            type="text"
-            name="id"
-            value={studentInfo.id}
-            onChange={handleInputChange}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={studentInfo.password}
-            onChange={handleInputChange}
-            required
-          />
-        </label>
-        <br />
-        <button type="submit">Submit</button>
-      </form>
+      <input type="text" placeholder='ID' onChange={handleInputChange} name='id' required/>
+      <input type="text" placeholder='Name' onChange={handleInputChange} name='name' required/>
+      <input type="password" placeholder='Password' onChange={handleInputChange} name='password' required/>
+      <br />
+      <button onClick={() => handleSubmit()}>Submit</button>
     </div>
   );
 };
