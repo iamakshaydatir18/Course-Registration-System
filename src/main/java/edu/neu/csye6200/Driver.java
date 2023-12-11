@@ -1,18 +1,11 @@
 package edu.neu.csye6200;
 
-/**
- * 
- * @author Ruchika Sharma
- * 
- */
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Driver {
 	public static void main(String[] args) {
-		System.out.println("============Main Execution Start===================\n\n");
-
-         //Add your code in between these two print statements
-		 
-		System.out.println("\n\n============Main Execution End===================");
+		SpringApplication.run(Driver.class, args);
 	}
-
 }
