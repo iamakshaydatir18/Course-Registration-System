@@ -1,43 +1,34 @@
 package edu.neu.csye6200.services;
 
 import java.util.List;
-import edu.neu.csye6200.models.Course;
-import edu.neu.csye6200.models.CourseFactory;
-import java.util.Iterator;
+import edu.neu.csye6200.models.Professor;
+
+import java.util.Optional;
 
 public class AdminService {
-    public boolean addminLogin(int id,String password){
-        if(id == 1001 && password == "pasword")
-            return true;
-        return false;
-    }
+    public boolean authenticateAdmin(String professorId, String password) {
+        int id = parseStringToInt(professorId);
+        List<Professor> professorList = AdminDbService.Instance.readFromFile();
+        Optional<Professor> professorOptional = professorList.stream().filter(v -> v.getId() == id).findFirst();
 
-    public void deleteCourse(int courseId) {
-        CourseDbService courseDbService = new CourseDbService();
-        List<Course> coursesList = courseDbService.readFromFile();
-        
-        for (Iterator<Course> iterator = coursesList.iterator(); iterator.hasNext();) {
-            Course course = iterator.next();
-            if (course.getCourseId() == courseId) {
-                iterator.remove();
-            }
+        if (professorOptional.isPresent()) {
+            Professor professor = professorOptional.get();
+            return checkPassword(professor, password);
+        } else {
+            return false;
         }
-        courseDbService.writeToFile(coursesList);
     }
 
-    public void createCourse(int courseId,String courseName, String courseDescription, int courseCredit, String instructorName, int instructorId) {
-        CourseDbService courseDbService = new CourseDbService();
-        List<Course> coursesList = courseDbService.readFromFile();
-        CourseFactory instance = CourseFactory.getInstance();
-        Course newCourse = instance.createCourse();
-
-        newCourse.setCourseCredit(courseCredit);
-        newCourse.setCourseDescription(courseDescription);
-        newCourse.setCourseId(courseId);
-        newCourse.setCourseName(courseName);
-        newCourse.setProfessor(instructorId, instructorName);
-
-        courseDbService.writeToFile(coursesList);
+    private boolean checkPassword(Professor professor, String inputPassword) {
+        return professor.getPassword().equals(inputPassword);
     }
 
+    private int parseStringToInt(String s) {
+        try {
+            return Integer.parseInt(s);
+        } catch (NumberFormatException ex) {
+            System.out.println("Error while parsing String to int");
+            throw ex;
+        }
+    }
 }
