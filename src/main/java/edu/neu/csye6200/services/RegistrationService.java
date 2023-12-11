@@ -6,7 +6,7 @@ import java.util.List;
 
 public class RegistrationService {
     public void registerNewStudent(int studentId, String studentName, String password) {
-        List<Student> studentRoasterList = StudentDbService.FileUtility.readFromFile();
+        List<Student> studentRoasterList = StudentDbService.readFromFile();
         Student newStudent = new Student();
         newStudent.setId(studentId);
         newStudent.setName(studentName);
@@ -14,6 +14,6 @@ public class RegistrationService {
 
         studentRoasterList.add(newStudent);
 
-        StudentDbService.FileUtility.writeToFile(studentRoasterList);
+        StudentDbService.writeToFile(studentRoasterList);
     }
 }
