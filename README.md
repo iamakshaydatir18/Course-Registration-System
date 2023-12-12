@@ -16,7 +16,7 @@ details, is stored in two CSV files, namely CoursesList.csv and StudentList.csv.
 3. Databse: Data stored as csv files
 4. Gradle: Build tool
 
-##Project Setup
+## Project Setup
 
 Frontend Setup:
 
