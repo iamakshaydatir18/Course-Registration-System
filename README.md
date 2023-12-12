@@ -53,6 +53,6 @@ AdminService: For administrative tasks, dependent on the completion of Course Da
 
 ## Individual Contributions
 1. Sangeet Saha(002246789): Full React setup, sass styling, Models, get requests
-2. Anuj Sharma(): CSV, databases services for CSV read and write, get requests
-3. Daniil Serpukhov(): Overall code skeleton, Gradle setup, Controllers, post requests
+2. Anuj Sharma(002292431): CSV, databases services for CSV read and write, get requests
+3. Daniil Serpukhov(001328035): Overall code skeleton, Gradle setup, Controllers, post requests
 
