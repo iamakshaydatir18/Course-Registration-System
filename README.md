@@ -104,4 +104,5 @@ AdminService: For administrative tasks, dependent on the completion of Course Da
 2. Anuj Sharma(002292431): CSV, databases services for CSV read and write, get requests
 3. Daniil Serpukhov(001328035): Overall code skeleton, Gradle setup, Controllers, post requests
 4. Abhishek Gopalakrishnan Unnithan(002839036): AdminServices, AdminController, AdminDB
+5. Akshit Hasmukh Kumar Jain(002876444): AccountService, RegistrationService, Course Service, Course Controller,
 
