@@ -10,9 +10,8 @@ ensuring dynamic content management. All essential data, including student infor
 details, is stored in two CSV files, namely CoursesList.csv and StudentList.csv.
 
 ## Project Video
-[![Watch the video](https://i.vimeocdn.com/video/893580710.jpg)](https://vimeo.com/893580710)
+[![Watch the video]](https://clipchamp.com/watch/a8NRTHtBvgk)
 
-## Implementations Used
 1. Frontend: [React] 
 2. Backend: [SpringBoot]
 3. Databse: Data stored as csv files
