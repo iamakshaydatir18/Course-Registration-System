@@ -9,6 +9,8 @@ Meanwhile, administrative users have the privilege to log in, add and delete cou
 ensuring dynamic content management. All essential data, including student information and course registration 
 details, is stored in two CSV files, namely CoursesList.csv and StudentList.csv.
 
+## Project Video
+[![Watch the video](https://i.vimeocdn.com/video/893580710.jpg)](https://vimeo.com/893580710)
 
 ## Implementations Used
 1. Frontend: [React] 
