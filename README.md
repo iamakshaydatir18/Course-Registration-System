@@ -14,6 +14,11 @@ details, is stored in two CSV files, namely CoursesList.csv and StudentList.csv.
 1. Frontend: [React] 
 2. Backend: [SpringBoot]
 3. Databse: Data stored as csv files
+4. Gradle: Build tool
+
+##Project Setup
+1. Install npm - for frontend build
+2. Install Gradle - for 
 
 
 ## Project Implementation Overview
@@ -47,4 +52,7 @@ AdminService: For administrative tasks, dependent on the completion of Course Da
 
 
 ## Individual Contributions
+Sangeet Saha(002246789): Full React setup, sass styling, Models, get requests
+Anuj Sharma(): CSV, databases services for CSV read and write, get requests
+Daniil Serpukhov(): Overall code skeleton, Gradle setup, Controllers, post requests
 
