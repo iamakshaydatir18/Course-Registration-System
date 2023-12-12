@@ -4,6 +4,7 @@ import {useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect } from 'react';
+import './AddNewCourses.scss'
 
 const Courses = () => {
     const location = useLocation()
@@ -53,28 +54,51 @@ const Courses = () => {
     }
 
   return (
-    <div>
+    <div className='add-new-courses'>
         <h1>Courses</h1>
-        <h3>Student id:{studentId}</h3>
-        <h3>Student name:{student.name}</h3>
-        <h3>Credits taken:{totalCreditsTaken}</h3>
-        <h3>Credits remaining:{24-totalCreditsTaken}</h3>
+        <div className='info'>
+          <span><h3>Student id:{studentId}</h3></span>
+          <span><h3>Student name:{student.name}</h3></span>
+          <span><h3>Credits taken:{totalCreditsTaken}</h3></span>
+          <span><h3>Credits remaining:{24-totalCreditsTaken}</h3></span>
+        </div>
         <div>
-          
-        {courses.map((course,index) => (
-            <div key={index}>
-                <span>{course.courseId}  </span>
-                <span>{course.courseName}  </span>
-                <span>Credits:{course.courseCredit}  </span>
-                <span>
-                    <button onClick={() => dropStudentFromCourse(course.courseId)}>Drop Course</button>
-                </span>
-            </div>
-        ))}
+        <div className='table-container'>
+        <table>
+        <thead>
+          <tr>
+            <th>Course ID</th>
+            <th>Course Name</th>
+            <th>Description</th>
+            <th>Credit</th>
+            <th>Instructor ID</th>
+            <th>Instructor Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {courses.map((course, index) => (
+            <tr key={index} className='course-item'>
+              <td>{course.courseId}</td>
+              <td>{course.courseName}</td>
+              <td>{course.courseDescription}</td>
+              <td>{course.courseCredit}</td>
+              <td>{course.instructor.id}</td>
+              <td>{course.instructor.name}</td>
+              <td>
+              <button onClick={() => dropStudentFromCourse(course.courseId)}>Drop Course</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      </div>
         <br />
         <br />
       </div>
-      <div><button><Link to={`/addnewcourses/${studentId}`}>Add New Course</Link></button></div>
+      <div className='button-container'>
+        <div><button><Link to={`/addnewcourses/${studentId}`}>Add New Course</Link></button></div>
+      </div>
     </div>
   )
 }

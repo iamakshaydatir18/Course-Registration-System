@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.google.gson.Gson;
 
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +20,7 @@ public class StudentController {
         List<Integer> registeredCourseIds = student.getCourses();
         List<Course> studentCourseList = CourseDbService.Instance.readFromFile().stream()
                 .filter(course -> registeredCourseIds.contains(course.getCourseId()))
+                .sorted(Comparator.comparingInt(Course::getCourseId))
                 .collect(Collectors.toList());
 
         Gson gson = new Gson();

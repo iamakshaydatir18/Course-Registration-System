@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react'
 import Modal from 'react-modal';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import './AddNewCourses.scss'
+
 
 Modal.setAppElement('#root');
 
@@ -82,22 +84,44 @@ const Adminpage = () => {
     }
 
   return (
-    <div>
+    <div className='add-new-courses'>
         <h1>Admin Page</h1>
-        <div>
-            {courses.map((course, index) => (
-                <div key={index}>
-                    <span>{course.courseId} || </span>
-                    <span>{course.courseName} || </span>
-                    <span>{course.courseDescription} || </span>
-                    <span>{course.courseCredit} || </span>
-                    <span>{course.instructor?.name || 'N/A'} || </span>
-                    <span>{course.instructor?.id || 'N/A'} || </span>
-                    <span><button onClick={() => deleteCourse(course.courseId)}>Delete Course</button></span>
-                </div>
-            ))}
-        </div>
-        <h2><button onClick={()=>openModal()}>Add a new course</button></h2>
+        <div className='table-container'>
+        <table>
+        <thead>
+          <tr>
+            <th>Course ID</th>
+            <th>Course Name</th>
+            <th>Description</th>
+            <th>Credit</th>
+            <th>Instructor ID</th>
+            <th>Instructor Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {courses.map((course, index) => (
+            <tr key={index} className='course-item'>
+              <td>{course.courseId}</td>
+              <td>{course.courseName}</td>
+              <td>{course.courseDescription}</td>
+              <td>{course.courseCredit}</td>
+              <td>{course.instructor?.id || 'N/A'}</td>
+              <td>{course.instructor?.name || 'N/A'}</td>
+              <td>
+                <button onClick={() => deleteCourse(course.courseId)}>Delete Course</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      </div>
+        
+    <div className='button-container'>
+      <span><h2><button onClick={()=>openModal()}>Add a new course</button></h2></span>
+      <span></span>
+      </div >
+
         <Modal
             isOpen={modalIsOpen}
             onAfterOpen={afterOpenModal}

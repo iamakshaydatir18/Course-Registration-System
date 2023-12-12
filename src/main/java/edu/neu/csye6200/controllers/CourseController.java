@@ -9,6 +9,10 @@ import com.google.gson.Gson;
 
 import edu.neu.csye6200.services.CourseDbService;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class CourseController {
@@ -17,7 +21,8 @@ public class CourseController {
 
         CourseDbService obj = new CourseDbService();
         Gson gson = new Gson();
-        return(gson.toJson(obj.readFromFile()));
+        List<Course> courses = obj.readFromFile().stream().sorted(Comparator.comparingInt(Course::getCourseId)).collect(Collectors.toList());
+        return(gson.toJson(courses));
     }
     
 

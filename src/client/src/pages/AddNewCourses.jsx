@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
+import './AddNewCourses.scss'
+
 
 const AddNewCourses = () => {
     const location = useLocation();
@@ -36,29 +38,50 @@ const AddNewCourses = () => {
     }
 
   return (
-    <div>
-        <h1>Courses</h1>
-        <h3>Student id:{studentId}</h3>
-        <h3>Credits taken:{0}</h3>
-        <h3>Credits remaining:{24}</h3>
+
+    <div className='add-new-courses'>
+        <h1>Register for Courses</h1>
+        <div className='info'>
+        <span><h3>Student id:{studentId}</h3></span>
+        </div>
         <div>
-        {courses.map((course,index) => (
-            <div key={index}>
-                <span>{course.courseId}  </span>
-                <span>{course.courseName}  </span>
-                <span>{course.courseDescription}  </span>
-                <span>{course.courseCredit}  </span>
-                <span>{course.instructor.name}  </span>
-                <span>{course.instructor.id}  </span>
-                <span>
-                    <button onClick={() => registerStudentForCourse(course.courseId)}>Add Course</button>
-                </span>
-            </div>
-        ))}
+        <div className='table-container'>
+        <table>
+        <thead>
+          <tr>
+            <th>Course ID</th>
+            <th>Course Name</th>
+            <th>Description</th>
+            <th>Credit</th>
+            <th>Instructor ID</th>
+            <th>Instructor Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {courses.map((course, index) => (
+            <tr key={index} className='course-item'>
+              <td>{course.courseId}</td>
+              <td>{course.courseName}</td>
+              <td>{course.courseDescription}</td>
+              <td>{course.courseCredit}</td>
+              <td>{course.instructor.id}</td>
+              <td>{course.instructor.name}</td>
+              <td>
+                <button onClick={() => registerStudentForCourse(course.courseId)}>Add Course</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      </div>
+
         <br />
         <br />
       </div>
-      <div><button><Link to={`/coursespage/${studentId}`}>Go back to registered courses</Link></button></div>
+      <div className='button-container'>
+      <span><button><Link to={`/coursespage/${studentId}`}>Go back to registered courses</Link></button></span>
+      </div>
     </div>
   )
 }

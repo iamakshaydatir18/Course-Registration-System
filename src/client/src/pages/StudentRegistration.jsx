@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import './StudentRegistration.scss'
 
 const StudentRegistration = () => {
   const [id, setId] = useState(0)
@@ -34,7 +35,7 @@ const StudentRegistration = () => {
   };
 
   return (
-    <div>
+    <div className='StudentRegistration'>
       <h1>Student Registration</h1>
       <input type="text" placeholder='ID' onChange={handleInputChange} name='id' required/>
       <input type="text" placeholder='Name' onChange={handleInputChange} name='name' required/>
