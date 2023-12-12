@@ -20,8 +20,8 @@ details, is stored in two CSV files, namely CoursesList.csv and StudentList.csv.
 
 Frontend Setup:
 
-Install npm for frontend : npm install
-Install frontend dependencies : npm I
+Install npm for frontend : install npm from https://nodejs.org/en/download
+Install frontend dependencies : npm i
 
 Frontend Dependencies:
 "axios": "^1.6.2",
