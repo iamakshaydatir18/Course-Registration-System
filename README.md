@@ -9,45 +9,65 @@ Meanwhile, administrative users have the privilege to log in, add and delete cou
 ensuring dynamic content management. All essential data, including student information and course registration 
 details, is stored in two CSV files, namely CoursesList.csv and StudentList.csv.
 
+## Project Video
+[![Watch the video]](https://clipchamp.com/watch/a8NRTHtBvgk)
 
-## Implementations Used
 1. Frontend: [React] 
 2. Backend: [SpringBoot]
 3. Databse: Data stored as csv files
 4. Gradle: Build tool
 
-##Project Setup
+## Project Setup
 
-Frontend Setup:
+### Frontend Setup:
 
-Install npm for frontend : install npm from https://nodejs.org/en/download
-Install frontend dependencies : npm i
 
-Frontend Dependencies:
+1. Install npm for frontend : install npm from https://nodejs.org/en/download
+
+2. Install frontend dependencies : npm i
+
+
+### Frontend Dependencies:
+
 "axios": "^1.6.2",
+
 "react": "^18.2.0",
+
 "react-modal": "^3.16.1",
+
 "react-router-dom": "^6.20.0",
+
 "sass": "^1.69.5"
 
-Backend Setup:
 
-Install Gradle for backend.
+### Backend Setup:
 
-invoke a declared version of Gradle: gradle wrapper
 
-Backend dependencies:
+3. Install Gradle for backend: https://gradle.org/install
+
+4. invoke a declared version of Gradle: gradle wrapper
+
+### Backend dependencies:
+
 spring-boot-starter
+
 spring-boot-starter-web
+
 spring-boot-starter-test
+
 gson:2.8.9
 
-Build and start the application:
-./gradlew clean build
-./gradlew bootRun
 
-Access the Application:
-Navigate to http://localhost:8080 in any web browser.
+5. Build and start the application:
+
+./gradlew clean build
+
+./gradlew bootRUN
+
+
+### Access the Application:
+
+6. Navigate to http://localhost:8080 in any web browser.
 
 
 ## Project Implementation Overview
@@ -85,4 +105,8 @@ AdminService: For administrative tasks, dependent on the completion of Course Da
 2. Anuj Sharma(002292431): CSV, databases services for CSV read and write, get requests
 3. Daniil Serpukhov(001328035): Overall code skeleton, Gradle setup, Controllers, post requests
 4. Abhishek Gopalakrishnan Unnithan(002839036): AdminServices, AdminController, AdminDB
+5. Akshit Hasmukh Kumar Jain(002876444): AccountService, RegistrationService, Course Service, Course Controller
+6. Jovin Nicholas(002822737): LoginCredentials, LoginController, AccountServiceFactory, AccountService - authenticateUser()
+7. Akshay Datir(002822621): StudentController, File Input/Output reading.
+
 
