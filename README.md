@@ -20,34 +20,53 @@ details, is stored in two CSV files, namely CoursesList.csv and StudentList.csv.
 
 Frontend Setup:
 
-Install npm for frontend : install npm from https://nodejs.org/en/download
-Install frontend dependencies : npm i
+
+1. Install npm for frontend : install npm from https://nodejs.org/en/download
+
+2. Install frontend dependencies : npm i
+
 
 Frontend Dependencies:
+
 "axios": "^1.6.2",
+
 "react": "^18.2.0",
+
 "react-modal": "^3.16.1",
+
 "react-router-dom": "^6.20.0",
+
 "sass": "^1.69.5"
+
 
 Backend Setup:
 
-Install Gradle for backend.
 
-invoke a declared version of Gradle: gradle wrapper
+3. Install Gradle for backend.
+
+4. invoke a declared version of Gradle: gradle wrapper
 
 Backend dependencies:
+
 spring-boot-starter
+
 spring-boot-starter-web
+
 spring-boot-starter-test
+
 gson:2.8.9
 
-Build and start the application:
+
+5. Build and start the application:
+
 ./gradlew clean build
+
 ./gradlew bootRun
 
+
 Access the Application:
-Navigate to http://localhost:8080 in any web browser.
+
+6. Navigate to http://localhost:8080 in any web browser.
 
 
 ## Project Implementation Overview
